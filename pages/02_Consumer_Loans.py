@@ -6,7 +6,7 @@ from modules.comparator import Comparator
 
 @st.cache_data
 def load_loan_data():
-    df = pd.read_csv('data/loan_data_demo.csv', sep=';')
+    df = pd.read_csv('in/tables/loan_data_demo.csv')
     return df
 
 
