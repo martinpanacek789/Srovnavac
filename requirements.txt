@@ -1,2 +1,5 @@
 streamlit~=1.22.0
 watchdog~=3.0.0
+
+pandas~=2.0.1
+numpy~=1.24.3
