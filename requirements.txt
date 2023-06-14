@@ -3,3 +3,4 @@ watchdog~=3.0.0
 
 pandas~=2.0.1
 numpy~=1.24.3
+numpy_financial~=1.0.0
