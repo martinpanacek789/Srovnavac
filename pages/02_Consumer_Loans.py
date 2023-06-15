@@ -94,7 +94,7 @@ if st.session_state.calculated:
     st.write(selected_loan)
 
     int_rate = float(st.session_state.available_loans[
-                   st.session_state.available_loans['product_name'] == selected_loan]['min_rate'])
+                   st.session_state.available_loans['product_name'] == selected_loan]['min_rate'].iloc[0])
 
     st.write(int_rate)
 
