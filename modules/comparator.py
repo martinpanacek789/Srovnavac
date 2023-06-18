@@ -19,7 +19,7 @@ class Comparator:
         self.loan_data = loan_data # pd.read_csv('/Users/martinpanacek/Srovnavac/data/loan_data_demo.csv', sep=';')
         self.only_banks = only_banks
 
-        self.available_loans = self.compare_loans(self.loan_data, self.loan_amount, self.special_type)
+        self.available_loans = self.compare_loans(self.loan_data, self.loan_amount, self.special_type, self.only_banks)
         self.recommended_loan = self.available_loans.iloc[0]
 
     @staticmethod
