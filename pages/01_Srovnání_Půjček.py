@@ -1,4 +1,4 @@
-# 01_Consumer_Loans.py
+# 01_Srovnání_Půjček.py
 import streamlit as st
 
 import pandas as pd
@@ -103,6 +103,7 @@ if st.session_state.calculated:
 
     fig = create_pie_chart(['Celková splatná částka', 'Celkem úrok'],
                            [round(loan.total_amount_paid, 2), round(loan.total_interest, 2)])
+
     st.plotly_chart(fig)
 
     # Display the payment plan
