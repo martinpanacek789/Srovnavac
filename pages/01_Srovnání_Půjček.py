@@ -53,7 +53,7 @@ with st.sidebar:
 
     comp = st.button('Zobrazit')
 
-    st.markdown("\n\n")
+    st.markdown('<br>' * 3, unsafe_allow_html=True) # Add some space
 
 
 st.write("Rozhodnutí ohledně financí a půjček může být pro mladé lidi obtížné. "
