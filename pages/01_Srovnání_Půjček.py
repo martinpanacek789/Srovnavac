@@ -40,14 +40,13 @@ with st.sidebar:
     calc_type = st.radio("Chci", ('Zadat dobu splácení', 'Zadat kolik můžu splácet'))
 
     if calc_type == 'Zadat kolik můžu splácet':
-        pay_amt = st.number_input('Kolik můžu splácet:', value=1_000)
+        pay_amt = st.number_input('Kolik můžu splácet:', value=1_000, step=1_000)
         pay_time = None
     else:
-        pay_time = st.number_input('Doba splácení:', value=36)
+        pay_time = st.number_input('Doba splácení (měsíce):', value=36)
         pay_amt = None
 
-    special_loan_case = st.radio('Speciální případ',
-                                    ('Ne','Auto', 'Bydlení', 'Studium', 'Konsolidace'))
+    special_loan_case = st.radio('Speciální případ', ('Ne', 'Auto', 'Bydlení', 'Studium', 'Konsolidace'))
 
     show_payment_plan = st.checkbox('Ukázat plán splácení')
     only_banks = st.checkbox('Pouze bankovní půjčky')
