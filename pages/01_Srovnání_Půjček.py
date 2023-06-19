@@ -108,7 +108,7 @@ if st.session_state.calculated:
     fig = create_pie_chart(['Celková splatná částka', 'Celkem úrok'],
                            [round(loan.total_amount_paid, 2), round(loan.total_interest, 2)])
 
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
     # Display the payment plan
     if show_payment_plan:
