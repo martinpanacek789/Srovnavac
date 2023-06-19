@@ -34,8 +34,8 @@ def change_callback():
 st.title("Srovnání půjček")
 
 with st.sidebar:
-    loan_amt = st.number_input('Kolik si chci půjčit:', value=100_000)
-    income_amt = st.number_input('Čistý měsíční příjem:', value=100_000)
+    loan_amt = st.number_input('Kolik si chci půjčit:', value=100_000, step=1_000)
+    income_amt = st.number_input('Čistý měsíční příjem:', value=30_000, step=1_000)
 
     calc_type = st.radio("Chci", ('Zadat dobu splácení', 'Zadat kolik můžu splácet'))
 
