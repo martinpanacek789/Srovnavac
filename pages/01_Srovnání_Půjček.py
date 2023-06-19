@@ -53,7 +53,7 @@ with st.sidebar:
 
     comp = st.button('Zobrazit')
 
-    st.markdown("\n")
+    st.markdown("\n\n")
 
 
 st.write("Rozhodnutí ohledně financí a půjček může být pro mladé lidi obtížné. "
