@@ -53,6 +53,8 @@ with st.sidebar:
 
     comp = st.button('Zobrazit')
 
+    st.markdown("\n")
+
 
 st.write("Rozhodnutí ohledně financí a půjček může být pro mladé lidi obtížné. "
          "S naším nekomerčním porovnávačem spotřebitelských půjček "
@@ -86,8 +88,10 @@ if comp:
 if st.session_state.calculated:
     # Show the best loans
     st.write(f"Nejlepší půjčky pro vás:")
-    st.markdown(hide_table_row_index, unsafe_allow_html=True)
-    st.table(st.session_state.available_loans.head(5))
+    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    # st.table(st.session_state.available_loans.head(5))
+
+    st.dataframe(data=st.session_state.available_loans, hide_index=True, use_container_width=True)
 
     selected_loan = st.selectbox('Vyberte půjčku', st.session_state.available_loans_name)
 
