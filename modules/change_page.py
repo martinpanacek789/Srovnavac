@@ -1,6 +1,6 @@
 from streamlit.components.v1 import html
 
-def nav_page(page_name, timeout_secs=3):
+def nav_page(page_name, timeout_secs=10):
     nav_script = """
         <script type="text/javascript">
             function attempt_nav_page(page_name, start_time, timeout_secs) {

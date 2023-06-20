@@ -1,5 +1,6 @@
 # 01_Srovnání_Půjček.py
 import streamlit as st
+from streamlit_option_menu import option_menu
 
 import pandas as pd
 import plotly.graph_objects as go
@@ -8,6 +9,7 @@ from modules.loan import Loan
 from modules.comparator import Comparator
 from modules.change_page import nav_page
 
+
 @st.cache_data
 def load_loan_data():
     df = pd.read_csv('data/in/tables/loan_data_demo.csv')
@@ -15,8 +17,8 @@ def load_loan_data():
 
 
 def create_pie_chart(labels, values):
-    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
-    return fig
+    pie = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    return pie
 
 
 hide_table_row_index = """
@@ -26,45 +28,77 @@ hide_table_row_index = """
         </style>
         """
 
-
-def change_callback():
-    print("Callback called")
-
-
 st.title("Srovnání půjček")
 
+st.write("Rozhodnutí ohledně financí a půjček může být pro mladé lidi obtížné. "
+         "S naším nekomerčním porovnávačem spotřebitelských půjček "
+         "získáte přehled o nabídkách od různých poskytovatelů."
+         "Díky personalizovanému vyhledávání najdete půjčku Vám přesně na míru!\n")
+
+
+st.write("Zde je možné zadat parametry půjčky a vyhledat odpovídající půjčky "
+         "nebo vyzkoušet jednu z přednastavených variant.")
+
+dummy_option = option_menu(None,
+                           ['Vlastní parametry', "Bydlení", "Auto", "Studium", "Zahraniční pobyt"],
+                           icons=['gear', 'house', 'car-front', "book", "airplane"],
+                           menu_icon="cast", default_index=0, orientation="horizontal")
+
+loan_amt_init = 100_000
+pay_time_init = 36
+pay_amt_init = 5_000
+special_loan_case_init = 0
+
+if dummy_option == 'Bydlení':
+    loan_amt_init = 500_000
+    pay_time_init = 120
+    pay_amt_init = 15_000
+    special_loan_case_init = 2
+elif dummy_option == 'Auto':
+    loan_amt_init = 250_000
+    pay_time_init = 60
+    pay_amt_init = 10_000
+    special_loan_case_init = 1
+elif dummy_option == 'Studium':
+    loan_amt_init = 200_000
+    pay_time_init = 48
+    pay_amt_init = 5_000
+    special_loan_case_init = 3
+elif dummy_option == 'Zahraniční pobyt':
+    loan_amt_init = 150_000
+    pay_time_init = 36
+    pay_amt_init = 5_000
+
 with st.sidebar:
-    loan_amt = st.number_input('Kolik si chci půjčit:', value=100_000, step=1_000)
-    income_amt = st.number_input('Čistý měsíční příjem:', value=30_000, step=1_000)
+    loan_amt = st.number_input('Kolik si chci půjčit:', value=loan_amt_init, step=1_000)
+    income_amt = st.number_input('Čistý měsíční příjem:', value=40_000, step=1_000)
 
     calc_type = st.radio("Chci", ('Zadat dobu splácení', 'Zadat kolik můžu splácet'))
 
     if calc_type == 'Zadat kolik můžu splácet':
-        pay_amt = st.number_input('Kolik můžu splácet:', value=1_000, step=1_000)
+        pay_amt = st.number_input('Kolik můžu splácet:', value=pay_amt_init, step=1_000)
         pay_time = None
     else:
-        pay_time = st.number_input('Doba splácení (měsíce):', value=36)
+        pay_time = st.number_input('Doba splácení (měsíce):', value=pay_time_init, step=1)
         pay_amt = None
 
-    special_loan_case = st.radio('Speciální případ', ('Ne', 'Auto', 'Bydlení', 'Studium', 'Konsolidace'))
+    special_loan_case = st.radio('Speciální případ', ('Ne', 'Auto', 'Bydlení', 'Studium', 'Konsolidace'),
+                                 index=special_loan_case_init)
 
     show_payment_plan = st.checkbox('Ukázat plán splácení')
     only_banks = st.checkbox('Pouze bankovní půjčky')
 
     comp = st.button('Zobrazit')
 
-    st.markdown('<br>' * 3, unsafe_allow_html=True) # Add some space
-
-
-st.write("Rozhodnutí ohledně financí a půjček může být pro mladé lidi obtížné. "
-         "S naším nekomerčním porovnávačem spotřebitelských půjček "
-         "získáte přehled o nabídkách od různých poskytovatelů."
-         "Díky personalizovanému vyhledávání najdete půjčku Vám přesně na míru!")
+    st.markdown('<br>' * 3, unsafe_allow_html=True)
 
 st.header("Výsledky:")
 
 if 'calculated' not in st.session_state or st.session_state.calculated is False:
-    st.write("Nejprve vyplňte formulář a stiskněte tlačítko Zobrazit")
+    if dummy_option == "Vlastní parametry":
+        st.write("Nejprve vyplňte formulář a stiskněte tlačítko Zobrazit")
+    else:
+        st.write("Stiskněte tlačítko Zobrazit, případně nejdříve upravte parametry půjčky")
     st.session_state.calculated = False
     st.session_state.available_loans_name = []
 
@@ -91,7 +125,17 @@ if st.session_state.calculated:
     # st.markdown(hide_table_row_index, unsafe_allow_html=True)
     # st.table(st.session_state.available_loans.head(5))
 
-    st.dataframe(data=st.session_state.available_loans, hide_index=True, use_container_width=True)
+    st.dataframe(data=st.session_state.available_loans,
+                 hide_index=True,
+                 # use_container_width=True,
+                 column_config={
+                     "product_name": "Název Produktu",
+                     "zk_award": "Ocenění ZK",
+                     "delay": "Odklad",
+                     "min_rate": "Minimální úrok",
+                     "non_bank": "Nebankovní",
+                     "online": "Sjednání online",
+                 })
 
     selected_loan = st.selectbox('Vyberte půjčku', st.session_state.available_loans_name)
 
@@ -120,4 +164,3 @@ if st.session_state.calculated:
 
     if st.button('Více informací'):
         nav_page("FAQ")
-

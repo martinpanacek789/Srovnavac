@@ -1,16 +1,8 @@
 import streamlit as st
 
-from streamlit_option_menu import option_menu
+st.title("Srovnávač půjček")
 
-st.title("Hello World")
-
-st.write("Title page of the app")
-
-st.write("Some text here")
-
-
-selected2 = option_menu(None, ['Vlastní parametry', "Bydlení", "Auto", "Studium", "Zahraniční pobyt"],
-                        icons=['gear', 'house', 'car-front', "book", "airplane"],
-                        menu_icon="cast", default_index=0, orientation="horizontal")
-
-st.write(selected2)
+st.write("Rozhodnutí ohledně financí a půjček může být pro mladé lidi obtížné. "
+         "S naším nekomerčním porovnávačem spotřebitelských půjček "
+         "získáte přehled o nabídkách od různých poskytovatelů."
+         "Díky personalizovanému vyhledávání najdete půjčku Vám přesně na míru!")
