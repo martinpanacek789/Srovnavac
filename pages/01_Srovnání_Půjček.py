@@ -130,10 +130,22 @@ if st.session_state.calculated:
                  # use_container_width=True,
                  column_config={
                      "product_name": "Název Produktu",
-                     "zk_award": "Ocenění ZK",
+                     "zk_award": st.column_config.TextColumn(
+                         "Ocenění ZK",
+                         width="medium"),
                      "delay": "Odklad",
+                     "min_amt": st.column_config.NumberColumn(
+                        "Minimální částka",
+                         format="%.0f Kč"
+                     ),
+                     "max_amt": st.column_config.NumberColumn(
+                        "Maximální částka",
+                         format="%.0f Kč"
+                     ),
+                     "min_len": None,
+                     "max_len": None,
                      "min_rate": "Minimální úrok",
-                     "non_bank": "Nebankovní",
+                     "non_bank": None,
                      "online": "Sjednání online",
                      "special_cat": None,
                      "link": st.column_config.LinkColumn(
@@ -153,7 +165,7 @@ if st.session_state.calculated:
     st.write(f"Celkem úrok: {round(loan.total_interest, 2)}")
     st.write(f"Celková splatná částka: {round(loan.total_amount_paid, 2)}")
     st.write(f"Počet splátek: {round(loan.payment_plan.Month.max(), 0)}")
-    st.write(f"Procent z příjmů: {round(loan.monthly_payment/income_amt, 2)*100} %")
+    st.write(f"Procent z příjmů: {round((loan.monthly_payment / income_amt) * 100, 1)} %")
 
     fig = create_pie_chart(['Celková splatná částka', 'Celkem úrok'],
                            [round(loan.total_amount_paid, 2), round(loan.total_interest, 2)])
