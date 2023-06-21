@@ -1,0 +1,21 @@
+product_name,zk_award,delay,min_amt,max_amt,min_rate,min_len,max_len,non_bank,special_cat,online,link
+Zonky,,Ano,5000,1200000,4.99,12,120,1,none,Ano,https://www.zonky.cz
+ČSOB Online,,Ano,20000,1200000,6.99,12,96,0,none,Ano,https://www.csob.cz/portal/lide/pujcky/pujcka-na-cokoliv
+ČSOB Konsolidace,,Ano,50000,1200000,6.9,12,96,0,Konsolidace,Ano,https://www.csob.cz/portal/lide/pujcky/konsolidace
+ČSOB Na Bydlení,,Ano,70000,1500000,6.9,12,144,0,Bydlení,Ano,https://www.csob.cz/portal/lide/pujcky/pujcka-na-lepsi-bydleni
+Autopůjčka ČSOB Leasing,,Ne,20000,5000000,8.89,24,96,1,Auto,Ano,https://www.csobleasing.cz/autopujcka
+mBank Půjčka na cokoliv,,Ano,10000,1000000,6.49,12,96,0,none,Ano,https://www.mbank.cz/osobni/uvery/mpujcka/
+mBank Konsolidace,,Ano,10000,1000000,6.99,12,96,0,Konsolidace,Ano,https://www.mbank.cz/osobni/uvery/mpujcka-konsolidace/
+Moneta Půjčka na cokoliv,Stříbrná koruna,Ne,5000,1500000,6.31,24,120,1,none,Ano,https://www.moneta.cz/pujcky-a-uvery/pujcka-na-cokoliv
+Moneta Půjčka na auto,,Ne,25000,10000,9.79,6,108,0,Auto,Ano,https://www.monetaauto.cz/nove-vozy
+Moneta Konsolidace,,Ne,5000,1500000,7.24,24,120,0,Konsolidace,Ano,https://www.moneta.cz/pujcky-a-uvery/slouceni-pujcek
+Air Bank Půjčka,Zlatá koruna,Ano,5000,1200000,4.9,6,114,0,none,Ano,https://www.airbank.cz/produkty/pujcka/
+KB Půjčka na cokoliv,,Ano,10000,2500000,6.9,12,96,0,none,Ano,https://www.kb.cz/cs/obcane/pujcky/pujcka
+KB Půjčka na udržitelné technologie,Zelená koruna,Ano,30000,2500000,6.9,12,120,0,Bydlení,Ne,https://www.kb.cz/cs/obcane/pujcky/pujcka-na-udrzitelne-technologie
+Online půjčka České spořitelny,Bronzová koruna,Ano,2000,1200000,6.9,12,120,0,none,Ano,https://www.csas.cz/cs/osobni-finance/pujcky/pujcka
+Minutová půjčka Raiffeisenbank,,Ne,5000,800000,6.7,3,120,0,none,Ano,https://www.rb.cz/osobni/pujcky/minutova-pujcka#iframe
+PRESTO Půjčka,,Ano,20000,1250000,6.49,12,120,0,none,Ano,https://www.unicreditbank.cz/cs/obcane/pujcky/kalkulacka-uveru-presto-na-cokoliv.html
+PRESTO Půjčka na bydlení,,Ano,100000,1250000,6.29,12,180,0,Bydlení,Ne,https://www.unicreditbank.cz/cs/obcane/pujcky/pujcky/pujcka-na-bydleni.html
+Fio splátkový úvěr,,Ne,10000,6000000,7.58,6,96,0,none,Ano,https://www.fio.cz/bankovni-sluzby/uvery/pujcky/novy-klient#tabs
+Půjčka Cofidis,,Ne,100000,1000000,11.1,12,120,1,none,Ano,https://www.cofidis.cz/cz/produkty/nastavte-si-vasi-pujcku.html?amount=90000
+Provident 10+1,,Ne,10000,40000,21.31,11,11,0,none,Ano,

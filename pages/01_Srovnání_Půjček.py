@@ -12,7 +12,7 @@ from modules.change_page import nav_page
 
 @st.cache_data
 def load_loan_data():
-    df = pd.read_csv('data/in/tables/loan_data_demo.csv')
+    df = pd.read_csv('data/in/tables/loan_data_final.csv')
     return df
 
 
@@ -135,6 +135,10 @@ if st.session_state.calculated:
                      "min_rate": "Minimální úrok",
                      "non_bank": "Nebankovní",
                      "online": "Sjednání online",
+                     "special_cat": None,
+                     "link": st.column_config.LinkColumn(
+                         "Odkaz"
+                     ),
                  })
 
     selected_loan = st.selectbox('Vyberte půjčku', st.session_state.available_loans_name)
@@ -148,6 +152,8 @@ if st.session_state.calculated:
     st.write(f"Měsíční splátka: {round(loan.monthly_payment, 2)}")
     st.write(f"Celkem úrok: {round(loan.total_interest, 2)}")
     st.write(f"Celková splatná částka: {round(loan.total_amount_paid, 2)}")
+    st.write(f"Počet splátek: {round(loan.payment_plan.Month.max(), 0)}")
+    st.write(f"Procent z příjmů: {round(loan.monthly_payment/income_amt, 2)*100} %")
 
     fig = create_pie_chart(['Celková splatná částka', 'Celkem úrok'],
                            [round(loan.total_amount_paid, 2), round(loan.total_interest, 2)])
