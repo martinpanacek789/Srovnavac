@@ -6,3 +6,4 @@ pandas~=2.0.1
 numpy~=1.24.3
 numpy_financial~=1.0.0
 plotly~=5.15.0
+openai~=0.27.8

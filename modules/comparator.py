@@ -3,7 +3,7 @@ import streamlit as st
 
 
 class Comparator:
-    def __init__(self,  loan_data, loan_amount, special_type=None, only_banks=False):
+    def __init__(self,  loan_data, loan_amount, special_type=None, only_banks=False, pay_timme=None):
         """
         Initialize a Loan instance.
 
@@ -24,7 +24,7 @@ class Comparator:
 
     @staticmethod
     @st.cache_data
-    def compare_loans(loan_data, loan_amount, special_type='none', only_banks=False):
+    def compare_loans(loan_data, loan_amount, special_type='none', only_banks=False, pay_time=None):
         """
         Select suitable loans based on loan amount and special type, then sort them by interest rate.
 
@@ -39,6 +39,9 @@ class Comparator:
 
         if only_banks:
             loans = loans.query('non_bank==0')
+
+        if pay_time is not None:
+            loans = loans.query('max_len>=@pay_time and min_len<=@pay_time')
 
         loans = loans.query('max_amt>=@loan_amount and min_amt<=@loan_amount') \
             .sort_values('min_rate') \

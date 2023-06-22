@@ -20,14 +20,6 @@ def create_pie_chart(labels, values):
     pie = go.Figure(data=[go.Pie(labels=labels, values=values)])
     return pie
 
-
-hide_table_row_index = """
-        <style>
-        thead tr th:first-child {display:none}
-        tbody th {display:none}
-        </style>
-        """
-
 st.title("Srovnání půjček")
 
 st.write("Rozhodnutí ohledně financí a půjček může být pro mladé lidi obtížné. "
@@ -122,8 +114,6 @@ if comp:
 if st.session_state.calculated:
     # Show the best loans
     st.write(f"Nejlepší půjčky pro vás:")
-    # st.markdown(hide_table_row_index, unsafe_allow_html=True)
-    # st.table(st.session_state.available_loans.head(5))
 
     st.dataframe(data=st.session_state.available_loans,
                  hide_index=True,
@@ -175,10 +165,18 @@ if st.session_state.calculated:
     # Display the payment plan
     if show_payment_plan:
         st.subheader("Plán splácení:")
-        st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
         # Display the output table
-        st.table(loan.payment_plan)
+        st.dataframe(data=loan.payment_plan,
+                     hide_index=True,
+                     use_container_width=True,
+                     column_config={
+                        "Month": "Měsíc",
+                        "Monthly Payment": st.column_config.NumberColumn("Měsíční splátka", format="%.2f Kč"),
+                        "Interest Paid": st.column_config.NumberColumn("Úrok", format="%.2f Kč"),
+                        "Principal Paid": st.column_config.NumberColumn("Jistina", format="%.2f Kč"),
+                        "Remaining Balance": st.column_config.NumberColumn("Zbývající dluh", format="%.2f Kč")
+                     })
 
     if st.button('Více informací'):
         nav_page("FAQ")
