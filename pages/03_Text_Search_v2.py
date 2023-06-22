@@ -16,7 +16,9 @@ def load_loan_data():
     return df
 
 
-openai.api_key = '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'
+openai.api_key = st.secrets["OPENAI_API_KEY"]
+
+#'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'
 
 @st.cache_data
 def process_text_input(text):
