@@ -1,6 +1,8 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+import re
+
 import pandas as pd
 import plotly.graph_objects as go
 import openai
@@ -17,8 +19,6 @@ def load_loan_data():
 
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
-
-#'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'
 
 @st.cache_data
 def process_text_input(text):
@@ -48,7 +48,6 @@ pay_amt_2 = None
 special_loan_case_2 = 0
 
 if 'calculated_2' not in st.session_state or st.session_state.calculated_2 is False:
-    st.write("Enter a value:")
     st.session_state.calculated_2 = False
     st.session_state.available_loans_name_2 = []
 
@@ -62,9 +61,23 @@ gpt_output = None
 if st.button('Vyhledat'):
     gpt_output = process_text_input(input_query)
 
+if gpt_output is not None:
+    loan_amt_gpt = float(re.findall(r'\d+', gpt_output[0])[0])
+    if loan_amt_gpt > 0:
+        loan_amt_2 = loan_amt_gpt
+
+    pay_time_gpt = int(re.findall(r'\d+', gpt_output[1])[0])
+    if pay_time_gpt > 0:
+        pay_time_2 = pay_time_gpt
+
+    pay_amt_gpt = float(re.findall(r'\d+', gpt_output[2])[0])
+    if pay_amt_gpt > 0 and pay_time_gpt == 0:
+        pay_amt_2 = pay_amt_gpt
+
 
 st.write(input_query)
 st.write(gpt_output)
+st.write(loan_amt_2)
 
 comp2 = st.checkbox('Zobrazit')
 

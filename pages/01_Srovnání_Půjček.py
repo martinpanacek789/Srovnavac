@@ -96,7 +96,7 @@ if 'calculated' not in st.session_state or st.session_state.calculated is False:
 
 if comp:
     # Compare available loans
-    comparator = Comparator(load_loan_data(), loan_amt, special_loan_case, only_banks)
+    comparator = Comparator(load_loan_data(), loan_amt, special_loan_case, only_banks, pay_time)
 
     st.session_state.available_loans = comparator.available_loans
 
