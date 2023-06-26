@@ -3,7 +3,7 @@ import streamlit as st
 
 
 class Comparator:
-    def __init__(self,  loan_data, loan_amount, special_type=None, only_banks=False, pay_timme=None):
+    def __init__(self,  loan_data, loan_amount, special_type=None, only_banks=False, pay_time=None):
         """
         Initialize a Loan instance.
 

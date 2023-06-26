@@ -151,9 +151,9 @@ if st.session_state.calculated:
     loan = Loan(loan_amt, int_rate/100, loan_length=pay_time, max_monthly_payment=pay_amt)
 
     # Total interest paid
-    st.write(f"Měsíční splátka: {round(loan.monthly_payment, 2)}")
-    st.write(f"Celkem úrok: {round(loan.total_interest, 2)}")
-    st.write(f"Celková splatná částka: {round(loan.total_amount_paid, 2)}")
+    st.write(f"Měsíční splátka: {round(loan.monthly_payment, 2)} Kč")
+    st.write(f"Celkem úrok: {round(loan.total_interest, 2)} Kč")
+    st.write(f"Celková splatná částka: {round(loan.total_amount_paid, 2)} Kč")
     st.write(f"Počet splátek: {round(loan.payment_plan.Month.max(), 0)}")
     st.write(f"Procent z příjmů: {round((loan.monthly_payment / income_amt) * 100, 1)} %")
 
