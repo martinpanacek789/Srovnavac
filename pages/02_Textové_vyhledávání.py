@@ -58,7 +58,7 @@ if 'pay_amt_gpt' not in st.session_state:
 
 st.title("Text search")
 
-text_search_input = st.text_input('Enter a value:', value='a')
+text_search_input = st.text_input('Enter a value:', value='Chci si půjčit 100 000 Kč na 36 měsíců.')
 
 search_button = st.button('Search')
 
@@ -146,8 +146,8 @@ if st.session_state.loans_ready:
 
     selected_loan_3 = st.selectbox('Vyberte půjčku', st.session_state.available_loans_name_3)
 
-    int_rate_3 = float(st.session_state.available_loans[
-                   st.session_state.available_loans['product_name'] == selected_loan_3]['min_rate'].iloc[0])
+    int_rate_3 = float(st.session_state.available_loans_3[
+                   st.session_state.available_loans_3['product_name'] == selected_loan_3]['min_rate'].iloc[0])
 
     st.session_state.loan_3 = Loan(st.session_state.loan_amt_gpt, int_rate_3/100,
                                    loan_length=st.session_state.pay_time_gpt,
