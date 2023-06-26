@@ -65,6 +65,10 @@ search_button = st.button('Search')
 if search_button:
     # st.write("Searching for: ", text_search_input)
 
+    if len(text_search_input) < 5:
+        st.write("Text je moc krátký.")
+        st.stop()
+
     st.session_state.gpt_output = process_text_input(text_search_input)
 
     st.session_state.calculated_3 = True
