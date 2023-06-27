@@ -119,7 +119,7 @@ if st.session_state.calculated:
     # Show the best loans
     st.write(f"Nejlepší půjčky pro vás:")
 
-    st.dataframe(data=st.session_state.available_loans.style.format(thousands=" ", na_rep="Žádné", precision=2),
+    st.dataframe(data=st.session_state.available_loans.style.format(thousands=" ", na_rep="", precision=2),
                  hide_index=True,
                  # use_container_width=True,
                  column_config={
