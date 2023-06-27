@@ -56,11 +56,11 @@ if 'pay_time_gpt' not in st.session_state:
 if 'pay_amt_gpt' not in st.session_state:
     st.session_state.pay_amt_gpt = None
 
-st.title("Text search")
+st.title("Textové vyhledávání")
 
-text_search_input = st.text_input('Enter a value:', value='Chci si půjčit 100 000 Kč na 36 měsíců.')
+text_search_input = st.text_input('Zde je možné zadat textový popis:', value='Chci si půjčit 100 000 Kč na 36 měsíců.')
 
-search_button = st.button('Search')
+search_button = st.button('Hledat')
 
 if search_button:
     # st.write("Searching for: ", text_search_input)
