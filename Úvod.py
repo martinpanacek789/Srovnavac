@@ -27,7 +27,6 @@ st.markdown("Aplikace je založena na moderních technologiích, obsahuje textov
 st.markdown("Děkujeme, že jste navštívili naši aplikaci a doufáme, že se Vám bude líbit.\n"
             "Tým studentů datové analytiky FIS VŠE")
 
-
-
+st.image('data/in/files/ZK_logo.png', use_column_width=True)
 
 
