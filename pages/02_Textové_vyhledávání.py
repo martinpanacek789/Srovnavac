@@ -166,7 +166,7 @@ if st.session_state.loans_ready:
                            [round(st.session_state.loan_3.total_amount_paid, 2),
                             round(st.session_state.loan_3.total_interest, 2)])
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
     if st.checkbox('Zobrazit plán splátek'):
         st.subheader("Plán splácení:")

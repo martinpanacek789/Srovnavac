@@ -31,37 +31,41 @@ st.write("Rozhodnutí ohledně financí a půjček může být pro mladé lidi o
 st.write("Zde je možné zadat parametry půjčky a vyhledat odpovídající půjčky "
          "nebo vyzkoušet jednu z přednastavených variant.")
 
-dummy_option = option_menu(None,
-                           ['Vlastní parametry', "Bydlení", "Auto", "Studium", "Zahraniční pobyt"],
-                           icons=['gear', 'house', 'car-front', "book", "airplane"],
-                           menu_icon="cast", default_index=0, orientation="horizontal")
 
-loan_amt_init = 100_000
-pay_time_init = 36
-pay_amt_init = 5_000
-special_loan_case_init = 0
-
-if dummy_option == 'Bydlení':
-    loan_amt_init = 500_000
-    pay_time_init = 120
-    pay_amt_init = 15_000
-    special_loan_case_init = 2
-elif dummy_option == 'Auto':
-    loan_amt_init = 250_000
-    pay_time_init = 60
-    pay_amt_init = 10_000
-    special_loan_case_init = 1
-elif dummy_option == 'Studium':
-    loan_amt_init = 200_000
-    pay_time_init = 48
-    pay_amt_init = 5_000
-    special_loan_case_init = 3
-elif dummy_option == 'Zahraniční pobyt':
-    loan_amt_init = 150_000
-    pay_time_init = 36
-    pay_amt_init = 5_000
 
 with st.sidebar:
+    dummy_option = option_menu(None,
+                           ['Vlastní parametry', "Bydlení", "Auto", "Studium", "Zahraniční pobyt"],
+                           icons=['gear', 'house', 'car-front', "book", "airplane"],
+                           menu_icon="cast", default_index=0)
+
+    loan_amt_init = 100_000
+    pay_time_init = 36
+    pay_amt_init = 5_000
+    special_loan_case_init = 0
+
+    if dummy_option == 'Bydlení':
+        loan_amt_init = 500_000
+        pay_time_init = 120
+        pay_amt_init = 15_000
+        special_loan_case_init = 2
+    elif dummy_option == 'Auto':
+        loan_amt_init = 250_000
+        pay_time_init = 60
+        pay_amt_init = 10_000
+        special_loan_case_init = 1
+    elif dummy_option == 'Studium':
+        loan_amt_init = 200_000
+        pay_time_init = 48
+        pay_amt_init = 5_000
+        special_loan_case_init = 3
+    elif dummy_option == 'Zahraniční pobyt':
+        loan_amt_init = 150_000
+        pay_time_init = 36
+        pay_amt_init = 5_000
+
+    # st.markdown('css-pxxe24 {visibility: hidden;}', unsafe_allow_html=True)
+
     loan_amt = st.number_input('Kolik si chci půjčit:', value=loan_amt_init, step=1_000)
     income_amt = st.number_input('Čistý měsíční příjem:', value=40_000, step=1_000)
 
@@ -115,14 +119,15 @@ if st.session_state.calculated:
     # Show the best loans
     st.write(f"Nejlepší půjčky pro vás:")
 
-    st.dataframe(data=st.session_state.available_loans,
+    st.dataframe(data=st.session_state.available_loans.style.format(thousands=" ", na_rep="Žádné", precision=2),
                  hide_index=True,
                  # use_container_width=True,
                  column_config={
                      "product_name": "Název Produktu",
                      "zk_award": st.column_config.TextColumn(
                          "Ocenění ZK",
-                         width="medium"),
+                         width="medium"
+                     ),
                      "delay": "Odklad",
                      "min_amt": st.column_config.NumberColumn(
                         "Minimální částka",
@@ -134,7 +139,10 @@ if st.session_state.calculated:
                      ),
                      "min_len": None,
                      "max_len": None,
-                     "min_rate": "Minimální úrok",
+                     "min_rate": st.column_config.NumberColumn(
+                         "Minimální úrok",
+                         format="%.2f %%"
+                     ),
                      "non_bank": None,
                      "online": "Sjednání online",
                      "special_cat": None,
@@ -151,16 +159,16 @@ if st.session_state.calculated:
     loan = Loan(loan_amt, int_rate/100, loan_length=pay_time, max_monthly_payment=pay_amt)
 
     # Total interest paid
-    st.write(f"Měsíční splátka: {round(loan.monthly_payment, 2)} Kč")
-    st.write(f"Celkem úrok: {round(loan.total_interest, 2)} Kč")
-    st.write(f"Celková splatná částka: {round(loan.total_amount_paid, 2)} Kč")
+    st.write(f"Měsíční splátka: {'{:,.2f} Kč'.format(loan.monthly_payment).replace(',', ' ')}")
+    st.write(f"Celkem úrok: {'{:,.2f} Kč'.format(loan.total_interest).replace(',', ' ')}")
+    st.write(f"Celková splatná částka: {'{:,.2f} Kč'.format(loan.total_amount_paid).replace(',', ' ')}")
     st.write(f"Počet splátek: {round(loan.payment_plan.Month.max(), 0)}")
     st.write(f"Procent z příjmů: {round((loan.monthly_payment / income_amt) * 100, 1)} %")
 
     fig = create_pie_chart(['Celková splatná částka', 'Celkem úrok'],
                            [round(loan.total_amount_paid, 2), round(loan.total_interest, 2)])
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
     # Display the payment plan
     if show_payment_plan:
