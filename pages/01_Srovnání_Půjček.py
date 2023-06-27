@@ -35,34 +35,39 @@ st.write("Zde je možné zadat parametry půjčky a vyhledat odpovídající pů
 
 with st.sidebar:
     dummy_option = option_menu(None,
-                           ['Vlastní parametry', "Bydlení", "Auto", "Studium", "Zahraniční pobyt"],
-                           icons=['gear', 'house', 'car-front', "book", "airplane"],
+                           ['Vlastní parametry', "Bydlení", "Auto", "Studium", "Zahraniční pobyt", "Konsolidace"],
+                           icons=['gear', 'house', 'car-front', "book", "airplane", "cash-coin"],
                            menu_icon="cast", default_index=0)
 
     loan_amt_init = 100_000
     pay_time_init = 36
     pay_amt_init = 5_000
-    special_loan_case_init = 0
+    special_loan_case = 'none'
 
     if dummy_option == 'Bydlení':
         loan_amt_init = 500_000
         pay_time_init = 120
         pay_amt_init = 15_000
-        special_loan_case_init = 2
+        special_loan_case = 'Bydlení'
     elif dummy_option == 'Auto':
         loan_amt_init = 250_000
         pay_time_init = 60
         pay_amt_init = 10_000
-        special_loan_case_init = 1
+        special_loan_case = 'Auto'
     elif dummy_option == 'Studium':
         loan_amt_init = 200_000
         pay_time_init = 48
         pay_amt_init = 5_000
-        special_loan_case_init = 3
+        special_loan_case = 'Studium'
     elif dummy_option == 'Zahraniční pobyt':
         loan_amt_init = 150_000
         pay_time_init = 36
         pay_amt_init = 5_000
+    elif dummy_option == 'Konsolidace':
+        loan_amt_init = 300_000
+        pay_time_init = 48
+        pay_amt_init = 5_000
+        special_loan_case = 'Konsolidace'
 
     # st.markdown('css-pxxe24 {visibility: hidden;}', unsafe_allow_html=True)
 
@@ -78,8 +83,8 @@ with st.sidebar:
         pay_time = st.number_input('Doba splácení (měsíce):', value=pay_time_init, step=1)
         pay_amt = None
 
-    special_loan_case = st.radio('Speciální případ', ('Ne', 'Auto', 'Bydlení', 'Studium', 'Konsolidace'),
-                                 index=special_loan_case_init)
+    # special_loan_case = st.radio('Speciální případ', ('Ne', 'Auto', 'Bydlení', 'Studium', 'Konsolidace'),
+    #                            index=special_loan_case_init)
 
     show_payment_plan = st.checkbox('Ukázat plán splácení')
     only_banks = st.checkbox('Pouze bankovní půjčky')
