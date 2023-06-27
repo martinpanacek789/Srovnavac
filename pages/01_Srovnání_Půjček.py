@@ -128,6 +128,10 @@ if st.session_state.calculated:
                          "Ocenění ZK",
                          width="medium"
                      ),
+                     "min_rate": st.column_config.NumberColumn(
+                         "Minimální úrok",
+                         format="%.2f %%"
+                     ),
                      "delay": "Odklad",
                      "min_amt": st.column_config.NumberColumn(
                         "Minimální částka",
@@ -139,10 +143,6 @@ if st.session_state.calculated:
                      ),
                      "min_len": None,
                      "max_len": None,
-                     "min_rate": st.column_config.NumberColumn(
-                         "Minimální úrok",
-                         format="%.2f %%"
-                     ),
                      "non_bank": None,
                      "online": "Sjednání online",
                      "special_cat": None,
