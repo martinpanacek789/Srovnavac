@@ -120,7 +120,7 @@ if st.session_state.loans_ready:
     # Show the best loans
     st.write(f"Nejlepší půjčky pro vás:")
 
-    st.dataframe(data=st.session_state.available_loans_3,
+    st.dataframe(data=st.session_state.available_loans_3.style.format(thousands=" ", na_rep="", precision=2),
                  hide_index=True,
                  # use_container_width=True,
                  column_config={
@@ -160,7 +160,7 @@ if st.session_state.loans_ready:
                                    loan_length=st.session_state.pay_time_gpt,
                                    max_monthly_payment=st.session_state.pay_amt_gpt)
 
-    st.write(f"Měsíční splátka: {round(st.session_state.loan_3.monthly_payment, 2)} Kč")
+    st.write(f"Měsíční splátka: {'{:,.2f} Kč'.format(st.session_state.loan_3.monthly_payment).replace(',', ' ')}")
     st.write(f"Celkem úrok: {round(st.session_state.loan_3.total_interest, 2)} Kč")
     st.write(f"Celková splatná částka: {round(st.session_state.loan_3.total_amount_paid, 2)} Kč")
     st.write(f"Počet splátek: {round(st.session_state.loan_3.payment_plan.Month.max(), 0)}")
