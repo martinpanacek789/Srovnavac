@@ -3,8 +3,18 @@ from streamlit_extras.switch_page_button import switch_page
 
 st.title("Srovnávač půjček")
 
-if st.button("Srovnat půjčky"):
-    switch_page("Srovnání půjček")
+st.write("Přejít na")
+
+col1, col2 = st.columns(2)
+with col1:
+    if st.button("Srovnat půjčky", key="srovnani_pujcek", use_container_width=True):
+        switch_page("Srovnání půjček")
+        # st.write("Srovnání půjček")
+
+with col2:
+    if st.button("Textové vyhledávání", key="textove_vyhledavani", use_container_width=True):
+        switch_page("Srovnání půjček")
+        # st.write("Textové vyhledávání")
 
 st.header("O projektu")
 
