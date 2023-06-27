@@ -161,8 +161,9 @@ if st.session_state.loans_ready:
                                    max_monthly_payment=st.session_state.pay_amt_gpt)
 
     st.write(f"Měsíční splátka: {'{:,.2f} Kč'.format(st.session_state.loan_3.monthly_payment).replace(',', ' ')}")
-    st.write(f"Celkem úrok: {round(st.session_state.loan_3.total_interest, 2)} Kč")
-    st.write(f"Celková splatná částka: {round(st.session_state.loan_3.total_amount_paid, 2)} Kč")
+    st.write(f"Celkem úrok: {'{:,.2f} Kč'.format(st.session_state.loan_3.total_interest).replace(',', ' ')}")
+    st.write(f"Celková splatná částka:"
+             f" {'{:,.2f} Kč'.format(st.session_state.loan_3.total_amount_paid).replace(',', ' ')}")
     st.write(f"Počet splátek: {round(st.session_state.loan_3.payment_plan.Month.max(), 0)}")
 
     fig = create_pie_chart(['Celková splatná částka', 'Celkem úrok'],
