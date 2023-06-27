@@ -13,7 +13,7 @@ with col1:
 
 with col2:
     if st.button("Textové vyhledávání", key="textove_vyhledavani", use_container_width=True):
-        switch_page("Srovnání půjček")
+        switch_page("Textové vyhledávání")
          # st.write("Textové vyhledávání")
 
 st.header("O projektu")
