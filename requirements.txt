@@ -1,5 +1,6 @@
 streamlit~=1.23.1
 streamlit_option_menu~=0.3.6
+streamlit_extras~=0.2.7
 watchdog~=3.0.0
 
 pandas~=2.0.1

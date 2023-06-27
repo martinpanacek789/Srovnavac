@@ -1,9 +1,10 @@
 import streamlit as st
+from streamlit_extras.switch_page_button import switch_page
 
 st.title("Srovnávač půjček")
 
-st.write("check out this [link](https://martinpanacek789-srovnavac-welcome-clc5f6.streamlit.app/Srovnání_Půjček)")
-
+if st.button("Srovnat půjčky"):
+    switch_page("Srovnání půjček")
 
 st.header("O projektu")
 
